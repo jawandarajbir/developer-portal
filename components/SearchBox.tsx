@@ -1,25 +1,28 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
 const SearchBox = (): JSX.Element => {
-
-
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="https://static.cloud.coveo.com/searchui/v2.7610/css/CoveoFullSearch.css" />
+        <link
+          rel="stylesheet"
+          href="https://static.cloud.coveo.com/searchui/v2.7610/css/CoveoFullSearch.css"
+        />
         <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"></script>
         <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"></script>
 
         <script
           dangerouslySetInnerHTML={{
-            __html: `
+            __html:
+              `
             document.addEventListener("DOMContentLoaded", function() {
-              Coveo.SearchEndpoint.configureCloudV2Endpoint(
-                "msitecorenetnonproductiontkunc72e",
-                "xx6ca1b643-89fd-40f5-b02b-86943626079e"
-              );       
+              Coveo.SearchEndpoint.configureCloudV2Endpoint(` +
+              process.env.COVEO_ENV +
+              `,` +
+              process.env.COVEO_API_KEY +
+              `);       
               var root = document.getElementById("searchBox");
-              Coveo.initSearchbox(root, "https://www.sitecore.com/search");
+              Coveo.initSearchbox(root, "/search");
             });
                         `,
           }}
