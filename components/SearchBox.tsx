@@ -1,21 +1,6 @@
-// Global
-import { TTailwindString } from 'tailwindcss-classnames';
-import { classnames } from 'tailwindcss-classnames';
-import { useId } from 'react-id-generator';
+import Head from 'next/head';
 
-type SearchBoxProps = {
-  className?: TTailwindString;
-};
-
-const SearchBox = ({ className }: SearchBoxProps): JSX.Element => {
-  /**
-   *  React hook for unique IDs using react-unique-id.
-   *  Avoid generating new ID on every rerender.
-   */
-  const [idSeed] = useId(1, 'scdp-search');
-  const searchId = idSeed;
-  const inputId = `${idSeed}--search-input`;
-
+const SearchBox = (): JSX.Element => {
   return (
     <>
       <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"></script>
