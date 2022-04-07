@@ -32,6 +32,10 @@ function SCDPApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com/" />
+        <link
+          rel="stylesheet"
+          href="https://static.cloud.coveo.com/searchui/v2.7610/css/CoveoFullSearch.css"
+        />
       </Head>
       <div className="theme-light text-theme-text bg-theme-bg dark:theme-dark">
         <Nav />

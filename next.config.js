@@ -48,7 +48,9 @@ const nextConfig = {
   env: {
     GTM_ID: process.env.GTM_ID,
     GTM_AUTH: process.env.GTM_AUTH,
-    GTM_ENVIRONMENT: process.env.GTM_ENVIRONMENT
+    GTM_ENVIRONMENT: process.env.GTM_ENVIRONMENT,
+    COVEO_API_KEY: process.env.COVEO_API_KEY,
+    COVEO_ENV: process.env.COVEO_ENV
   },
   images: {
     dangerouslyAllowSVG: true,
