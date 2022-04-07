@@ -80,13 +80,13 @@
   */
 
   .CoveoFieldValue.source-badge {
-    padding: 2px 12px 2px 5px;
+    padding: 2px 5px;
     color: #fdfdfd;
     font-size: 13px;
     font-weight: 600;
     min-width: auto;
     display: inline-block;
-    border-radius: 0 15px 15px 0;
+    border-radius: 0;
     background-color: #baac93;
   }
   .CoveoFieldValue.source-badge .coveo-clickable {
@@ -119,5 +119,34 @@
   }
   .CoveoFieldValue.clickable-field-value .coveo-clickable {
     color: #fdfdfd;
+  }
+  .coveo-facet-value.coveo-selected .coveo-facet-value-checkbox svg,
+  .coveo-facet-value:hover .coveo-facet-value-checkbox svg,
+  .coveo-facet-value.coveo-with-hover:hover:not(.coveo-facet-search-button):not(.coveo-excluded):not(.coveo-facet-value-will-exclude):not(.coveo-has-childs-selected)
+    .coveo-facet-value-checkbox
+    svg {
+    width: 18px;
+    height: 18px;
+    bottom: 1px;
+  }
+  .coveo-facet-breadcrumb-clear svg,
+  .coveo-facet-slider-breadcrumb-clear svg {
+    display: inline;
+  }
+  .coveo-icon-for-quickview-svg {
+    width: 100%;
+  }
+  /*.magic-box.magic-box-notEmpty .magic-box-clear {
+    top: 18px;
+    position: relative;
+  }*/
+  .magic-box .magic-box-clear {
+    top: 18px;
+  }
+  .coveo-search-section #searchbox {
+    display: flex;
+  }
+  #scdp-search2 input[type='text'] {
+    padding-left: 50px;
   }
 }

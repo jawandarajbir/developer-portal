@@ -89,6 +89,7 @@ const Layout = ({ pageInfo, children }: LayoutProps): JSX.Element => {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+
         {/*
           Necessary Meta tags, including Social tags.
           It's OK if they're empty, same as not printing them.
