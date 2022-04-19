@@ -17,10 +17,6 @@ const SearchPage = ({ className }: SearchPageProps): JSX.Element => {
   return (
     <>
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://static.cloud.coveo.com/searchui/v2.7610/css/CoveoFullSearch.css"
-        />
         <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"></script>
         <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"></script>
 

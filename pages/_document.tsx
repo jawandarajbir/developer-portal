@@ -17,7 +17,12 @@ export class MyDocument<P = {}> extends Component<DocumentProps & P> {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://static.cloud.coveo.com/searchui/v2.7610/css/CoveoFullSearch.css"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
