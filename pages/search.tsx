@@ -3,6 +3,7 @@ import { TTailwindString } from 'tailwindcss-classnames';
 import { classnames } from 'tailwindcss-classnames';
 import { useId } from 'react-id-generator';
 import Head from 'next/head';
+import Script from 'next/script';
 
 type SearchPageProps = {
   className?: TTailwindString;
@@ -16,24 +17,21 @@ const SearchPage = ({ className }: SearchPageProps): JSX.Element => {
 
   return (
     <>
-      <Head>
-        <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"></script>
-        <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"></script>
+      <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"></script>
+      <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"></script>
 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
               document.addEventListener('DOMContentLoaded', function () {
                 Coveo.SearchEndpoint.configureCloudV2Endpoint(
                   "sitecorenet34jt6lbn",
                   "xx797e74e3-585c-421d-97e9-7bbe015c7af9"
                 );                
                 Coveo.init(document.getElementById("search"));
-              })
-                        `,
-          }}
-        />
-      </Head>
+              })`,
+        }}
+      />
 
       <div
         id="search"
