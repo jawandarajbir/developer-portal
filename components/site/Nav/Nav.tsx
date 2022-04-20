@@ -1,5 +1,6 @@
 // Global
 import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import { classnames } from 'tailwindcss-classnames';
@@ -51,6 +52,8 @@ const hamburgerBarClasses = classnames(
 
 const Nav = (): JSX.Element => {
   const navRef = useRef<HTMLElement>(null);
+  const router = useRouter();
+  const showSearch = router.pathname === '/search' ? false : true;
   const [isOpen, setOpen] = useState(false);
 
   /**
@@ -119,27 +122,42 @@ const Nav = (): JSX.Element => {
     // Change height utility to `h-32` to the header.
     //
     // Necesarry to retain the space for the fixed header.
-    <header className={classnames('h-32')}>
+    <header className={showSearch ? classnames('h-32') : classnames('h-16')}>
       {/*
         // @TODO: Adding search back
         // Change height utility to `h-32` to the containing div.
       */}
       <div
-        className={classnames(
-          'bg-theme-bg',
-          'border-b',
-          'border-theme-border',
-          'shadow-theme',
-          'z-40',
-          'fixed',
-          'inset-x-0',
-          'top-0',
-          'h-32',
-          'transition-all',
-          {
-            '-top-16': scrolled, // Note: absolute is being used here to avoid "transform" resetting the coordinate system for the children that are relying on the document's coordinates.
-          }
-        )}
+        className={
+          showSearch
+            ? classnames(
+                'bg-theme-bg',
+                'border-b',
+                'border-theme-border',
+                'shadow-theme',
+                'z-40',
+                'fixed',
+                'inset-x-0',
+                'top-0',
+                'transition-all',
+                'h-32',
+                {
+                  '-top-16': scrolled, // Note: absolute is being used here to avoid "transform" resetting the coordinate system for the children that are relying on the document's coordinates.
+                }
+              )
+            : classnames(
+                'bg-theme-bg',
+                'border-b',
+                'border-theme-border',
+                'shadow-theme',
+                'z-40',
+                'fixed',
+                'inset-x-0',
+                'top-0',
+                'transition-all',
+                'h-16'
+              )
+        }
       >
         <a
           href={`#${idMainContent}`}
@@ -316,11 +334,13 @@ const Nav = (): JSX.Element => {
           // @TODO: Adding search back
           // Uncomment the div containing search here.
         */}
-        <div>
-          <div className={classnames('px-gutter-all', 'py-2.5', 'max-w-screen-xl', 'm-auto')}>
-            <SearchBox />
+        {showSearch && (
+          <div className="searchbox-nav">
+            <div className={classnames('px-gutter-all', 'py-2', 'max-w-screen-xl', 'm-auto')}>
+              <SearchBox />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );
