@@ -5,36 +5,38 @@ import { useId } from 'react-id-generator';
 import Head from 'next/head';
 import Script from 'next/script';
 
-type SearchPageProps = {
-  className?: TTailwindString;
-};
-
-const SearchPage = ({ className }: SearchPageProps): JSX.Element => {
+const SearchPage = (): JSX.Element => {
   /**
    *  React hook for unique IDs using react-unique-id.
    *  Avoid generating new ID on every rerender.
    */
+  const [idSeed] = useId(1, 'scdp-searchpage');
+  const searchId = idSeed;
+  const inputId = `${idSeed}--search-input`;
 
   return (
     <>
-      <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"></script>
-      <script src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"></script>
+      <Script
+        strategy="beforeInteractive"
+        src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"
+      ></Script>
+      <Script
+        strategy="beforeInteractive"
+        src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"
+      ></Script>
 
       <script
         dangerouslySetInnerHTML={{
           __html: `
               document.addEventListener('DOMContentLoaded', function () {
-                Coveo.SearchEndpoint.configureCloudV2Endpoint(
-                  "sitecorenet34jt6lbn",
-                  "xx797e74e3-585c-421d-97e9-7bbe015c7af9"
-                );                
-                Coveo.init(document.getElementById("search"));
+                Coveo.SearchEndpoint.configureCloudV2Endpoint('${process.env.COVEO_ENV}','${process.env.COVEO_API_KEY}');       
+                Coveo.init(document.getElementById('${searchId}'));
               })`,
         }}
       />
 
       <div
-        id="search"
+        id={searchId}
         className="CoveoSearchInterface"
         data-search-hub="devPortalSearch"
         data-pipeline="DeveloperPortalPipeline"
@@ -71,11 +73,7 @@ const SearchPage = ({ className }: SearchPageProps): JSX.Element => {
           ></div>
         </div>
         <div className="coveo-search-section">
-          <div
-            className="CoveoSearchbox"
-            data-enable-omnibox="true"
-            data-search-as-you-type-delay=""
-          ></div>
+          <div className="CoveoSearchbox"></div>
         </div>
         <div className="coveo-main-section">
           <div className="coveo-facet-column" style={{ width: 405 }}>
