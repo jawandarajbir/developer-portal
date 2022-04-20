@@ -13,3 +13,5 @@
 
 /* @TODO: Split these into separate utilities as they grow? */
 @import './_utilities.css';
+
+@import './vendors/coveo.css'
