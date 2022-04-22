@@ -17,22 +17,24 @@ const SearchBox = (): JSX.Element => {
     <>
       <Script
         strategy="beforeInteractive"
-        src="https://static.cloud.coveo.com/searchui/v2.7610/js/CoveoJsSearch.Lazy.min.js"
+        src="https://static.cloud.coveo.com/searchui/v2.10095/3/js/CoveoJsSearch.Lazy.min.js"
       ></Script>
       <Script
         strategy="beforeInteractive"
-        src="https://static.cloud.coveo.com/searchui/v2.7610/js/templates/templates.js"
+        src="https://static.cloud.coveo.com/searchui/v2.10095/3/js/templates/templates.js"
       ></Script>
 
-      <div id={searchId} data-enable-history="true">
+      <div id={searchId} className="CoveoSearchInterface">
         <div className={classnames('relative', 'items-center', 'w-full')}>
           <label className={classnames('sr-only')} htmlFor={inputId}>
             Search:
           </label>
           <div className="coveo-search-section">
+            <div className="CoveoAnalytics" data-search-hub="devPortalSearch"></div>
             <div
               id={inputId}
               className="CoveoSearchbox"
+              data-enable-omnibox="true"
               data-placeholder="What are you looking for?"
               data-add-search-button="true"
             ></div>
