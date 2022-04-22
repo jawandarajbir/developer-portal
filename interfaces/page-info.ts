@@ -62,6 +62,7 @@ export type PageInfo = PageInfoCore & {
   promoBefore: string[];
   promoAfter: string[];
   content?: string;
+  showHero?: boolean;
 };
 
 export type ChildPageInfo = {
