@@ -13,7 +13,7 @@ export async function Search(isPreview: boolean, productId?: string, changeTypeI
     { 
       data: allChangelog (
           orderBy: RELEASEDATE_DESC
-          ${buildParameters(productId, changeTypeId, searchTerm, pageSize, endCursor)}
+          ${buildParameters(productId, changeTypeId, searchTerm, pageSize, endCursor, isPreview)}
         ) {
           pageInfo {
             hasNext
@@ -31,13 +31,13 @@ export async function Search(isPreview: boolean, productId?: string, changeTypeI
   return response.data;
 }
 
-function buildParameters(productId?: string, changeTypeId?: string, searchTerm?: string, pageSize?: number, endCursor?: string): string {
+function buildParameters(productId?: string, changeTypeId?: string, searchTerm?: string, pageSize?: number, endCursor?: string, isPreview?: boolean): string {
   let parameters = ``;
 
   if (pageSize) parameters += `first: ${pageSize} \n`;
   if (endCursor) parameters += `after: "${endCursor}" \n`;
 
-  parameters += buildWhereClause(searchTerm, productId, changeTypeId);
+  parameters += buildWhereClause(searchTerm, productId, changeTypeId, isPreview);
 
   return parameters;
 }
@@ -53,7 +53,7 @@ const closeWHERE = '}';
 /*
   Building the complex WHERE clause based on parameters
 */
-function buildWhereClause(searchTerm?: string, productId?: string, changeTypeId?: string) {
+function buildWhereClause(searchTerm?: string, productId?: string, changeTypeId?: string, isPreview?: boolean) {
   if (!searchTerm && !productId && !changeTypeId) {
     return `where: { releaseDate_lt: "${new Date().toISOString()}" }`;
   }
@@ -82,7 +82,8 @@ function buildWhereClause(searchTerm?: string, productId?: string, changeTypeId?
 
   whereClause += buildSearchTermClause(searchTerm);
 
-  whereClause += `AND: { releaseDate_lt: ${new Date().toISOString()} }`;
+  // Only return future entries in preview mode
+  if (!isPreview) whereClause += `AND: { releaseDate_lt: ${new Date().toISOString()} }`;
 
   whereClause += closeWHERE;
   return whereClause;
