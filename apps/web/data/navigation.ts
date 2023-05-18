@@ -44,11 +44,11 @@ export const mainNavigation: NavigationData[] = [
     url: '/',
   },
   {
-    title: 'Sub page header',
+    title: 'Components',
     children: [
       {
-        title: 'Page 1',
-        url: '/page1',
+        title: 'Buttons',
+        url: '/components/buttons',
       },
       {
         title: 'Page 2',

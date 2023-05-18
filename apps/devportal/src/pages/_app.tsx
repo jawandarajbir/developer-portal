@@ -14,6 +14,7 @@ import Nav from 'ui/layouts/components/header/Nav';
 import '@/src/styles/global.css';
 import React from 'react';
 // Fonts
+import { MantineProvider } from '@mantine/core';
 import { Environment, PageController, WidgetsProvider, trackEntityPageViewEvent } from '@sitecore-search/react';
 import { AvenirNextLTPro } from 'ui/common/fonts/avenirNextLTPro';
 import { AvenirNextR } from 'ui/common/fonts/avenirNextR';
@@ -44,21 +45,23 @@ function SCDPApp({ Component, pageProps }: AppProps) {
 
   return (
     <WidgetsProvider {...SEARCH_CONFIG}>
-      <React.StrictMode>
-        <Head>
-          <link rel="dns-prefetch" href="https://www.googletagmanager.com/" />
-        </Head>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <React.StrictMode>
+          <Head>
+            <link rel="dns-prefetch" href="https://www.googletagmanager.com/" />
+          </Head>
 
-        <PreviewNotification enabled={isPreview} page={router.asPath} />
+          <PreviewNotification enabled={isPreview} page={router.asPath} />
 
-        <div className={`${AvenirNextR.variable} ${AvenirNextLTPro.variable} theme-light text-theme-text bg-theme-bg dark:theme-dark font-sans`}>
-          <Nav navigationData={mainNavigation} sitecoreQuickLinks={sitecoreQuickLinks}>
-            <SearchInputSwitcher />
-          </Nav>
-          <Component {...pageProps} />
-          <Footer />
-        </div>
-      </React.StrictMode>
+          <div className={`${AvenirNextR.variable} ${AvenirNextLTPro.variable} theme-light text-theme-text bg-theme-bg dark:theme-dark font-sans`}>
+            <Nav navigationData={mainNavigation} sitecoreQuickLinks={sitecoreQuickLinks}>
+              <SearchInputSwitcher />
+            </Nav>
+            <Component {...pageProps} />
+            <Footer />
+          </div>
+        </React.StrictMode>
+      </MantineProvider>
     </WidgetsProvider>
   );
 }

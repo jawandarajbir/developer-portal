@@ -1,6 +1,6 @@
 import React from 'react';
 
-type VerticalGroupSize = 'md' | 'lg';
+type VerticalGroupSize = 'xs' | 'md' | 'lg';
 
 type VerticalGroupProps = {
   children: React.ReactNode | React.ReactNodeArray;
@@ -8,6 +8,7 @@ type VerticalGroupProps = {
 };
 
 const verticalGroupClasses: Record<VerticalGroupSize, string> = {
+  xs: 'mb-8',
   md: 'mb-16',
   lg: 'mb-24',
 };
@@ -22,19 +23,13 @@ const VerticalGroup = ({ children, size = 'md' }: VerticalGroupProps): JSX.Eleme
       {children.map((child, i) => {
         if (React.isValidElement(child)) {
           return (
-            <div
-              className={`${children.length - 1 ? [verticalGroupClasses[size]].join(' ') : i}`}
-              key={i}
-            >
+            <div className={`${children.length - 1 ? [verticalGroupClasses[size]].join(' ') : i}`} key={i}>
               {child}
             </div>
           );
         } else if (Array.isArray(child)) {
           return child.map((c, j) => (
-            <div
-              className={`${children.length - 1 ? [verticalGroupClasses[size]].join(' ') : i}`}
-              key={j}
-            >
+            <div className={`${children.length - 1 ? [verticalGroupClasses[size]].join(' ') : i}`} key={j}>
               {c}
             </div>
           ));

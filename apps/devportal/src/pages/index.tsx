@@ -91,9 +91,7 @@ const HomePage = ({ pageInfo }: HomePageProps): JSX.Element => (
             linkText="Read the article"
             linkHref="/learn/getting-started/introduction-to-composable-dxp"
           />
-
           <PromoCard {...promoData} key="promo" isImageLeft={false} />
-
           <SitecoreCommunityNews content={pageInfo.sitecoreCommunity.news} />
           <SitecoreCommunityBlog content={pageInfo.sitecoreCommunity.blog} sortKeys={pageInfo.sitecoreCommunityBlogSort} />
           <SitecoreCommunityEvents content={pageInfo.sitecoreCommunity.events} />
