@@ -1,0 +1,9 @@
+html:not(.dark) > .sb-show-main {
+  /* replace color */
+  background: #ffffff !important;
+}
+
+.dark > .sb-show-main {
+  /* replace color */
+  background: #262626 !important;
+}

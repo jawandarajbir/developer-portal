@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react';
+import '../.storybook/storybook.css';
 import '../src/styles/global.scss';
 
 const preview: Preview = {
@@ -6,9 +7,13 @@ const preview: Preview = {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
-        color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+  },
+  globalTypes: {
+    darkMode: {
+      defaultValue: true, // Enable dark mode by default on all stories
     },
   },
 };
