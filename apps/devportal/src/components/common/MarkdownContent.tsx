@@ -28,7 +28,7 @@ type DecoratedMarkdownProps = {
   children: string;
 };
 
-const DecoratedMarkdown = ({ children }: DecoratedMarkdownProps): JSX.Element => {
+export const DecoratedMarkdown = ({ children }: DecoratedMarkdownProps): JSX.Element => {
   const [isDark, setIsLight] = useState(false);
 
   useEffect(() => {
@@ -53,6 +53,20 @@ const DecoratedMarkdown = ({ children }: DecoratedMarkdownProps): JSX.Element =>
             </div>
           ) : (
             <code className={className}>{children}</code>
+          );
+        },
+        a({ href, children, ...rest }) {
+          if (children?.toString().toLowerCase() == 'get latest' || children?.toString().toLowerCase() == 'see all versions') {
+            return (
+              <a className="btn-primary" href={href}>
+                {children}
+              </a>
+            );
+          }
+          return (
+            <a href={href} {...rest}>
+              {children}
+            </a>
           );
         },
         VideoPromo: VideoPromo,
@@ -87,6 +101,21 @@ const MarkdownContent = ({ partials, hasGrid = false }: MarkdownContentProps): J
       {partials.content.map((item, i) => (
         <div key={i}>
           <div className="prose dark:prose-invert max-w-4xl">
+            <DecoratedMarkdown>{item}</DecoratedMarkdown>
+          </div>
+          <EditButton editUrl={partials.fileNames[i]} />
+        </div>
+      ))}
+    </VerticalGroup>
+  );
+};
+
+export const MarkdownPageContent = ({ partials }: MarkdownContentProps): JSX.Element => {
+  return (
+    <VerticalGroup>
+      {partials.content.map((item, i) => (
+        <div key={i}>
+          <div className="prose dark:prose-invert prose-dev max-w-max">
             <DecoratedMarkdown>{item}</DecoratedMarkdown>
           </div>
           <EditButton editUrl={partials.fileNames[i]} />

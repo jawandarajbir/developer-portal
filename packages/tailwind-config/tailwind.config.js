@@ -265,6 +265,19 @@ module.exports = {
         'gutter-lg': '4rem',
       },
       typography: (theme) => ({
+        dev: {
+          css: {
+            h1: {
+              fontWeight: '400',
+            },
+            h2: {
+              color: theme('colors.violet.500'),
+            },
+            ['h3 > a:link']: {
+              color: theme('colors.violet.500'),
+            },
+          },
+        },
         DEFAULT: {
           css: {
             ['ol > li:before']: {

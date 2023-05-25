@@ -1,5 +1,6 @@
 import rehypeExtractHeadings from '@/src/common/markdown/rehype/extractHeadings';
 import { ContentHeading } from '@/src/interfaces/contentheading';
+import rehypeSection from '@agentofuser/rehype-section';
 import remarkEmbedder, { TransformerInfo } from '@remark-embedder/core';
 import oembedTransformer from '@remark-embedder/transformer-oembed';
 import { s } from 'hastscript';
@@ -24,6 +25,7 @@ export async function ParseContent(stream: string) {
       ],
       rehypePlugins: [
         rehypeSlug,
+        rehypeSection,
         [
           rehypeAutolinkHeadings,
           {

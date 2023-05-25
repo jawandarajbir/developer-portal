@@ -12,9 +12,11 @@ const integrationDirectory = path.join(process.cwd(), 'data/markdown/pages/integ
 const trialPagesDirectory = path.join(process.cwd(), 'data/markdown/pages/trials/');
 const faqPagesDirectory = path.join(process.cwd(), 'data/markdown/pages/learn/faq/');
 const gettingStartedDirectory = path.join(process.cwd(), 'data/markdown/pages/learn/getting-started/');
+const downloadsDirectory = path.join(process.cwd(), 'data/markdown/pages/downloads/');
 const faqDirectory = path.join(process.cwd(), 'data/faqs');
 const TrialDirectory = path.join(process.cwd(), 'data/trials');
 
+type DownloadPaths = { params: { page: string[] } };
 type SolutionPaths = { params: { solution: string } };
 type ProductPaths = { params: { product: string; solution: string } };
 type IntegrationPaths = { params: { integration: string } };
@@ -23,9 +25,41 @@ type MultiPageArticlePaths = { params: { article: string; page?: string } };
 type TrialPaths = { params: { trial: string } };
 type TrialNavPaths = { params: TrialNavContext };
 
+function getFilePaths(folderPath: string): string[] {
+  const filePaths: string[] = [];
+
+  function traverseFolder(currentPath: string): void {
+    const files = fs.readdirSync(currentPath);
+
+    files.forEach((file) => {
+      const filePath = path.join(currentPath, file);
+      const stats = fs.statSync(filePath);
+
+      if (stats.isDirectory()) {
+        traverseFolder(filePath); // Recursively traverse subfolders
+      } else if (stats.isFile()) {
+        const relativeFilePath = filePath.replace(downloadsDirectory, '').replace('\\index.md', '').replace('.md', '');
+        filePaths.push(relativeFilePath); // Add file path to the array
+      }
+    });
+  }
+
+  traverseFolder(folderPath);
+  return filePaths;
+}
+
 export const getSolutionPaths = async (): Promise<SolutionPaths[]> => {
   const files = fs.readdirSync(solutionsDirectory);
   return files.map((file) => ({ params: { solution: file } }));
+};
+
+export const getDownloadPaths = async (): Promise<DownloadPaths[]> => {
+  const paths: DownloadPaths[] = [];
+  const files = getFilePaths(downloadsDirectory);
+
+  files.map((file) => paths.push({ params: { page: file.split(path.sep) } }));
+
+  return paths;
 };
 
 export const getProductPaths = async (): Promise<ProductPaths[]> => {
