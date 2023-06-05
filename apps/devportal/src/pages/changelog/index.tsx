@@ -1,11 +1,11 @@
 import ChangelogByMonth from '@/src/components/changelog/ChangelogByMonth';
+import ChangelogResults from '@/src/components/integrations/changelog-search/ChangelogResults';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { ChangelogEntriesPaginated } from 'sc-changelog/changelog';
-import { SWRConfig } from 'swr';
 import SmallLinkButton from 'ui/components/buttons/SmallLinkButton';
 import Container from 'ui/components/common/Container';
 import { Message, Type } from 'ui/components/common/Message';
@@ -13,7 +13,6 @@ import VerticalGroup from 'ui/components/common/VerticalGroup';
 import { Option } from 'ui/components/dropdown/MultiSelect';
 import Hero from 'ui/components/heros/Hero';
 import Layout from 'ui/layouts/Layout';
-import ChangelogList from '../../components/changelog/ChangelogList';
 
 type ChangelogHomeProps = {
   fallback: any;
@@ -56,9 +55,12 @@ export default function ChangelogHome({ fallback }: ChangelogHomeProps) {
               </p>
             </Message>
             <div className="mt-8 grid h-full gap-16 md:grid-cols-5">
-              <SWRConfig value={{ fallback }}>
+              {/* <SWRConfig value={{ fallback }}>
                 <ChangelogList selectedProducts={selectedProduct} onProductsChange={setSelectedProduct} />
-              </SWRConfig>
+              </SWRConfig> */}
+
+              <ChangelogResults rfkId='rfkid_7' />
+
               <div className="col-span-2 hidden md:block">
                 <div className="flex flex-row">
                   <SmallLinkButton text={'RSS'} href={`${router.pathname}/rss.xml`} icon={'feed'} />
